@@ -27,7 +27,11 @@ app.get("/todos", function(req, res){
     if(err){
       console.log(err);
     } else {
+      if(req.xhr) {
+        res.json(todos)
+      } else {
       res.render("index", {todos: todos}); 
+      }
     }
   })
 });
@@ -43,7 +47,11 @@ app.post("/todos", function(req, res){
     if(err){
       res.render("new");
     } else {
+        if(req.xhr) {
+          res.json(newTodo);
+        } else {
         res.redirect("/todos");
+      }
     }
   });
 });
@@ -52,8 +60,8 @@ app.get("/todos/:id/edit", function(req, res){
  Todo.findById(req.params.id, function(err, todo){
    if(err){
      console.log(err);
-     res.redirect("/")
-   } else {
+      res.redirect("/")
+    } else {
       res.render("edit", {todo: todo});
    }
  });
@@ -64,18 +72,25 @@ app.put("/todos/:id", function(req, res){
    if(err){
      console.log(err);
    } else {
+      if(req.xhr) {
+        res.json(todo);
+      } else {
       res.redirect('/');
+    }
    }
  });
 });
 
 app.delete("/todos/:id", function(req, res){
- Todo.findById(req.params.id, function(err, todo){
+ Todo.findByIdAndRemove(req.params.id, function(err, todo){
    if(err){
      console.log(err);
    } else {
-      todo.remove();
-      res.redirect("/todos");
+      if (req.xhr) {
+        res.json(todo);
+      } else {
+        res.redirect("/todos");
+    }
    }
  }); 
 });
