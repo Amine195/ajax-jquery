@@ -48,8 +48,8 @@ $('#new-todo-form').submit(function(e) {
 
             <form action="/todos/${data._id}" method="POST" class="edit-item-form">
                 <div class="form-group">
-                    <label>Item Text</label>
-                    <input type="text" value="${data.text}" name="todo[text]" class="form-control">
+                    <label for="${data._id}">Item Text</label>
+                    <input type="text" value="${data.text}" name="todo[text]" class="form-control" id="${data._id}">
                 </div>
                 <button class="btn btn-primary">Update Item</button>
             </form>
@@ -90,8 +90,8 @@ $('#todo-list').on('submit', '.edit-item-form', function(e) {
                 `
                 <form action="/todos/${data._id}" method="POST" class="edit-item-form">
                     <div class="form-group">
-                        <label>Item Text</label>
-                        <input type="text" value="${data.text}" name="todo[text]" class="form-control">
+                    <label for="${data._id}">Item Text</label>
+                    <input type="text" value="${data.text}" name="todo[text]" class="form-control" id="${data._id}">
                     </div>
                     <button class="btn btn-primary">Update Item</button>
                 </form>
