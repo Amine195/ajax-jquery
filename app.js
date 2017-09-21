@@ -25,7 +25,6 @@ app.get("/", function(req, res){
 app.get("/todos", function(req, res){
   Todo.find({}, function(err, todos){
     if(err){
-      console.log(err);
     } else {
       if(req.xhr) {
         res.json(todos)
@@ -63,11 +62,7 @@ app.delete("/todos/:id", function(req, res){
    if(err){
      console.log(err);
    } else {
-      if (req.xhr) {
-        res.json(todo);
-      } else {
-        res.redirect("/todos");
-    }
+     res.json(todo);
    }
  }); 
 });
