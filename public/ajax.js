@@ -45,12 +45,21 @@ $('#new-todo-form').submit(function(e) {
         $('#todo-list').append(
             `
             <li class="list-group-item">
+
+            <form action="/todos/${data._id}" method="POST" class="edit-item-form">
+                <div class="form-group">
+                    <label>Item Text</label>
+                    <input type="text" value="${data.text}" name="todo[text]" class="form-control">
+                </div>
+                <button class="btn btn-primary">Update Item</button>
+            </form>
+
                 <span class="lead">
                     ${data.text}
                 </span>
                 <div class="pull-right">
-                    <a href="/todos/${data._id}/edit" class="btn btn-sm btn-warning">Edit</a>
-                    <form style="display: inline" method="POST" action="/todos/${data._id}">
+                    <button class="btn btn-sm btn-warning edit-button">Edit</button>
+                    <form style="display: inline" method="POST" action="/todos/${data._id}" class="delete-item-form">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </div>
@@ -93,7 +102,7 @@ $('#todo-list').on('submit', '.edit-item-form', function(e) {
                 <div class="pull-right">
                     <button class="btn btn-sm btn-warning edit-button">Edit</button>
 
-                    <form style="display: inline" method="POST" action="/todos/${data._text}">
+                    <form style="display: inline" method="POST" action="/todos/${data._text}" class="delete-item-form">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </div>
